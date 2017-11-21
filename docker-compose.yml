@@ -1,8 +1,18 @@
 version: '3'
 services:
   apache-php:
-    image: php:7.1.11-apache
+    build: ./apache-php
     volumes:
       - ./html:/var/www/html
     ports:
       - 1337:80
+    links:
+      - mysql
+
+  mysql:
+    image: mysql:8.0.3
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: lamp
+      MYSQL_USER: lamp
+      MYSQL_PASSWORD: lamp
